@@ -2200,11 +2200,23 @@ function SimulatorWidget(node) {
         return false;
       }
 
+      if (command === "TXT") {
+        console.log(command + " " + param);
+        if (param.match(/^"(?:[^"\\]|\\.)*"$/))
+          return TXT(param);
+        else return false;
+      }
+      // don't clobber TXT
       param = param.replace(/[ ]/g, "");
 
       if (command === "DCB") {
         return DCB(param);
       }
+
+      if (command === "DSB") {
+        return DSB(param);
+      }
+
       for (var o = 0; o < Opcodes.length; o++) {
         if (Opcodes[o][0] === command) {
           if (checkSingle(param, Opcodes[o][11])) {
@@ -2249,6 +2261,18 @@ function SimulatorWidget(node) {
       return false; // Unknown syntax
     }
 
+    function DSB(param) {
+      var n;
+      if (param.match(/^[0-9]+$/)) {
+        n = parseInt(param);
+        for (var x = 0; x < n; x++)
+          pushByte(0);
+      } else
+        return false;
+
+      return true;
+    }
+
     function DCB(param) {
       var values, number, str, ch;
       values = param.split(",");
@@ -2256,25 +2280,35 @@ function SimulatorWidget(node) {
         return false;
       }
       for (var v = 0; v < values.length; v++) {
-        str = values[v];
-        if (str) {
-          ch = str.substring(0, 1);
-          if (ch === "$") {
-            number = parseInt(str.replace(/^\$/, ""), 16);
-            pushByte(number);
-          } else if (ch >= "0" && ch <= "9") {
-            number = parseInt(str, 10);
-            pushByte(number);
-          } else if (ch = "\"" && str.substr(2,1) == "\"") {
-            number = str.charCodeAt(1) & 0xff;
-            pushByte(number);
-	  } else {
-            return false;
-          }
+      str = values[v];
+      if (str) {
+        ch = str.substring(0, 1);
+        if (ch === "$") {
+          number = parseInt(str.replace(/^\$/, ""), 16);
+          pushByte(number);
+        } else if (ch >= "0" && ch <= "9") {
+          number = parseInt(str, 10);
+          pushByte(number);
+        } else if (ch = "\"" && str.substr(2,1) == "\"") {
+          number = str.charCodeAt(1) & 0xff;
+          pushByte(number);
+	    } else {
+          return false;
         }
       }
-      return true;
     }
+    return true;
+  }
+
+  function TXT(param) {
+    // if we're here we ALREADY PASSED the regex.
+    // first and last char are "
+    var str = param.substring(1,param.length-1).replace('\\"', '"');
+    str = str.replaceAll("\\n", "\n");
+    for (var x = 0; x < str.length; x++)
+      pushByte(str.charCodeAt(x) & 0xff);
+    return true;
+  }
 
     // Try to parse the given parameter as a byte operand.
     // Returns the (positive) value if successful, otherwise -1
