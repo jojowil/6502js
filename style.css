@@ -11,6 +11,7 @@
 .textscreenarea {
   grid-column: 3;
   grid-row-start: span 2;
+  float: right;
 }
 
 .textscreen {
@@ -19,7 +20,7 @@
   border-spacing: 0px;
   border-collapse: collapse;
   font-family: "Courier";
-  font-size: 6pt;
+  font-size: 8pt;
   padding: 0px;
 }
 
@@ -64,6 +65,7 @@
   grid-column-end: 2;
   grid-row-start: span 2;
   resize: both;
+  white-space: pre;
 }
 
 .screen {
@@ -142,6 +144,6 @@
 }
 
 .popup {
-  font-size: 14pt;
+  font-size: 12pt;
 }
 
