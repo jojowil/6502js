@@ -180,7 +180,8 @@ function SimulatorWidget(node) {
     }
 
     function showNotes() {
-      $node.find('.messages code').html($node.find('.notes').html());
+      //$node.find('.messages code').html($node.find('.notes').html());
+      Assembler().openPopup($node.find('.notes').html(), 'Notes');
     }
 
     function captureTabInEditor(e) {
@@ -195,10 +196,12 @@ function SimulatorWidget(node) {
           caretEnd = this.selectionEnd,
           currentValue = this.value;
 
-        this.value = currentValue.substring(0, caretStart) + "\t" + currentValue.substring(caretEnd);
+        //this.value = currentValue.substring(0, caretStart) + "\t" + currentValue.substring(caretEnd);
+        this.value = currentValue.substring(0, caretStart) + "    " + currentValue.substring(caretEnd);
 
         // Move cursor forwards one (after tab)
-        this.selectionStart = this.selectionEnd = caretStart + 1;
+        //this.selectionStart = this.selectionEnd = caretStart + 1;
+        this.selectionStart = this.selectionEnd = caretStart + 4;
       }
     }
 
@@ -1842,8 +1845,11 @@ function SimulatorWidget(node) {
     }
 
     function stop() {
-      codeRunning = false;
-      message("\nStopped\n");
+      // quit saying stopped all the time!
+      if (codeRunning) {
+        codeRunning = false;
+        message("\nStopped\n");
+      }
     }
 
     function toggleMonitor() {
@@ -2885,7 +2891,8 @@ function SimulatorWidget(node) {
       hexdump: hexdump,
       disassemble: disassemble,
       download: download,
-      upload: upload
+      upload: upload,
+      openPopup: openPopup
     };
   }
 
