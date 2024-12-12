@@ -2201,7 +2201,6 @@ function SimulatorWidget(node) {
       }
 
       if (command === "TXT") {
-        console.log(command + " " + param);
         if (param.match(/^"(?:[^"\\]|\\.)*"$/))
           return TXT(param);
         else return false;
