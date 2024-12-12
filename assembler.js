@@ -2948,6 +2948,10 @@ function SimulatorWidget(node) {
       text += '\n'; // allow putc operations from the simulator (WDM opcode)
     $node.find('.messages code').append(text).scrollTop(10000);
   }
+  // add class="code" and id="code" to code-input textarea
+  const textarea = document.querySelector('textarea');
+  textarea.id = "code";
+  textarea.classList.add('code');
 
   initialize();
 }
