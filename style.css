@@ -51,7 +51,8 @@
   border: none;
 }
 
-.code {
+/* renamed and moved to code-input */
+.code-no {
   margin: 6px 6px 6px 6px;
   padding: 0px;
   /* border: 1px solid black; */
@@ -147,3 +148,19 @@
   font-size: 12px;
 }
 
+code-input {
+  margin: 6px 6px 6px 6px;
+  padding: 0px;
+  /* border: 1px solid black; */
+  width: 530px;
+  /* width: 100%; */
+  height: 380px;
+  font-family: monospace;
+  overflow: hidden;
+  float: left;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: span 2;
+  resize: both;
+  white-space: pre;
+}
