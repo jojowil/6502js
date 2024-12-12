@@ -210,14 +210,14 @@ show up as blanks.
 <b>ROM Routines:</b>
 These routines are defined in ROM:
 * SCINIT $ff81 - Initialize and clear the character display
-* CHRIN $ffcf - Input one character from keyboard (returns A)
-* CHROUT $ffdw - Outputs one character (A) to the screen at the current cursor
+* CHRIN  $ffcf - Input one character from keyboard (returns A)
+* CHROUT $ffd2 - Outputs one character (A) to the screen at the current cursor
     position. Screen will wrap/scroll appropriately. Printable characters
     and cursor codes ($80/$81/$82/$83 for up/right/down/left) as well as
     RETURN ($0d) are accepted. Printable ASCII codes with the high bit set
     will be printed in reverse video.
 * SCREEN $ffed - Returns the character screen size in the X and Y registers.
-* PLOT $fff0 - gets (CARRY=1) or sets (CARRY=0) the cursor position
+* PLOT   $fff0 - gets (CARRY=1) or sets (CARRY=0) the cursor position
    If C=0: X,Y registers set the cursor position
            Y:X is returned as a pointer to the current screen position
    If C=1: X,Y registers return the current cursor position
