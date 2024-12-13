@@ -152,10 +152,10 @@ code-input {
   margin: 6px 6px 6px 6px;
   padding: 0px;
   /* border: 1px solid black; */
-  width: 480px;
+  width: 460px;
   /* width: 100%; */
   height: 380px;
-  font-family: monospace;
+  font-family: "Source Code Pro", monospace;
   overflow: auto;
   float: left;
   grid-column-start: 1;
