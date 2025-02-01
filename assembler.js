@@ -2668,14 +2668,23 @@ function SimulatorWidget(node) {
             }
 
             // it could be a label too..
-            if (param.match(/^\w+$/)) {
+            // with a simple additive value for abs addr
+            // yeah it's cheap, but needed for simpler code examples.
+            match_data = param.match(/^(\w+)(\+\d{1,2})?$/);
+            if (match_data) {
                 pushByte(opcode);
-                if (labels.find(param)) {
-                    addr = (labels.getPC(param));
+                if (labels.find(match_data[1])) {
+                    addr = (labels.getPC(match_data[1]));
                     if (addr < 0 || addr > 0xffff) {
                         return false;
                     }
-                    pushWord(addr);
+                    // do a simple additive value for absolute addr
+                    var add = 0;
+                    if (match_data.length === 2) {
+                        add = parseInt(match_data[2]);
+                        if (isNaN(add)) add = 0;
+                    }
+                    pushWord(addr + add);
                     return true;
                 } else {
                     pushWord(0xffff); // filler, only used while indexing labels
