@@ -2718,8 +2718,10 @@ function SimulatorWidget(node) {
             match_data = param.match(/^(\w+)(\+\d{1,2})?$/);
             if (match_data) {
                 pushByte(opcode);
+                console.log(match_data[1]);
                 if (labels.find(match_data[1])) {
                     addr = (labels.getPC(match_data[1]));
+                    console.log("addr " + addr);
                     if (addr < 0 || addr > 0xffff) {
                         return false;
                     }
