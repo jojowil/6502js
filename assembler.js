@@ -2696,7 +2696,7 @@ function SimulatorWidget(node) {
 
         // Check if param is ABS and push value
         function checkAbsolute(param, opcode, symbols) {
-            var value, number, addr;
+            var value, number;
             if (opcode === null) {
                 return false;
             }
@@ -2721,12 +2721,12 @@ function SimulatorWidget(node) {
                 console.log(match_data[1]);
                 if (labels.find(match_data[1])) {
                     // do a simple additive value for absolute addr
-                    var add = 0;
+                    let add = 0;
                     if (match_data.length === 3) {
                         add = parseInt(match_data[2]);
                         if (isNaN(add)) add = 0;
                     }
-                    addr = (labels.getPC(match_data[1])) + add;
+                    let addr = parseInt(labels.getPC(match_data[1])) + parseInt(add);
                     console.log("addr " + addr);
                     if (addr < 0 || addr > 0xffff) {
                         return false;
