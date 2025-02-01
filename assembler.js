@@ -2217,6 +2217,14 @@ function SimulatorWidget(node) {
                 return DSB(param);
             }
 
+            if (command === "DCW") {
+                return DCW(param);
+            }
+
+            if (command === "DSW") {
+                return DSW(param);
+            }
+
             for (var o = 0; o < Opcodes.length; o++) {
                 if (Opcodes[o][0] === command) {
                     if (checkSingle(param, Opcodes[o][11])) {
@@ -2273,6 +2281,18 @@ function SimulatorWidget(node) {
             return true;
         }
 
+        function DSW(param) {
+            var n;
+            if (param.match(/^[0-9]+$/)) {
+                n = parseInt(param);
+                for (var x = 0; x < n; x++)
+                    pushWord(0);
+            } else
+                return false;
+
+            return true;
+        }
+
         function DCB(param) {
             var values, number, str, ch;
             values = param.split(",");
@@ -2292,6 +2312,30 @@ function SimulatorWidget(node) {
                     } else if (ch = "\"" && str.substr(2, 1) == "\"") {
                         number = str.charCodeAt(1) & 0xff;
                         pushByte(number);
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function DCW(param) {
+            var values, number, str, ch;
+            values = param.split(",");
+            if (values.length === 0) {
+                return false;
+            }
+            for (var v = 0; v < values.length; v++) {
+                str = values[v];
+                if (str) {
+                    ch = str.substring(0, 1);
+                    if (ch === "$") {
+                        number = parseInt(str.replace(/^\$/, ""), 16);
+                        pushWord(number);
+                    } else if (ch >= "0" && ch <= "9") {
+                        number = parseInt(str, 10);
+                        pushWord(number);
                     } else {
                         return false;
                     }
