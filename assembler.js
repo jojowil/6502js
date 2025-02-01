@@ -2680,7 +2680,7 @@ function SimulatorWidget(node) {
                     }
                     // do a simple additive value for absolute addr
                     var add = 0;
-                    if (match_data.length === 2) {
+                    if (match_data.length === 3) {
                         add = parseInt(match_data[2]);
                         if (isNaN(add)) add = 0;
                     }
