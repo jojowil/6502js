@@ -2200,6 +2200,7 @@ function SimulatorWidget(node) {
                 return false;
             }
 
+            console.out(param);
             if (command === "TXT") {
                 if (param.match(/^"(?:[^"\\]|\\.)*"$/))
                     return TXT(param);
