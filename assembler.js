@@ -2720,18 +2720,18 @@ function SimulatorWidget(node) {
                 pushByte(opcode);
                 console.log(match_data[1]);
                 if (labels.find(match_data[1])) {
-                    addr = (labels.getPC(match_data[1]));
-                    console.log("addr " + addr);
-                    if (addr < 0 || addr > 0xffff) {
-                        return false;
-                    }
                     // do a simple additive value for absolute addr
                     var add = 0;
                     if (match_data.length === 3) {
                         add = parseInt(match_data[2]);
                         if (isNaN(add)) add = 0;
                     }
-                    pushWord(addr + add);
+                    addr = (labels.getPC(match_data[1])) + add;
+                    console.log("addr " + addr);
+                    if (addr < 0 || addr > 0xffff) {
+                        return false;
+                    }
+                    pushWord(addr);
                     return true;
                 } else {
                     pushWord(0xffff); // filler, only used while indexing labels
