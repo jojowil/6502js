@@ -2657,6 +2657,7 @@ function SimulatorWidget(node) {
                 return false;
             }
 
+            console.out("in checkAbsolute " + param);
             var match_data = param.match(/^([\w\$]+)$/i);
             if (match_data) {
                 var operand = tryParseWordOperand(match_data[1], symbols);
@@ -2681,6 +2682,7 @@ function SimulatorWidget(node) {
                     // do a simple additive value for absolute addr
                     var add = 0;
                     if (match_data.length === 3) {
+                        console.out(match_data[2]);
                         add = parseInt(match_data[2]);
                         if (isNaN(add)) add = 0;
                     }
