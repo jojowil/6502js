@@ -2220,8 +2220,16 @@ function SimulatorWidget(node) {
                 return DCW(param);
             }
 
+            if (command === "DCQ") {
+                return DCQ(param);
+            }
+
             if (command === "DSW") {
                 return DSW(param);
+            }
+
+            if (command === "DSQ") {
+                return DSQ(param);
             }
 
             for (var o = 0; o < Opcodes.length; o++) {
@@ -2292,6 +2300,18 @@ function SimulatorWidget(node) {
             return true;
         }
 
+        function DSQ(param) {
+            var n;
+            if (param.match(/^[0-9]+$/)) {
+                n = parseInt(param);
+                for (var x = 0; x < n; x++)
+                    pushQuad(0);
+            } else
+                return false;
+
+            return true;
+        }
+
         function DCB(param) {
             var values, number, str, ch;
             values = param.split(",");
@@ -2305,7 +2325,7 @@ function SimulatorWidget(node) {
                     if (ch === "$") {
                         number = parseInt(str.replace(/^\$/, ""), 16);
                         pushByte(number);
-                    } else if (ch >= "0" && ch <= "9" || ch == '-') {
+                    } else if (ch >= "0" && ch <= "9" || ch == "-") {
                         number = parseInt(str, 10);
                         pushByte(number);
                     } else if (ch = "\"" && str.substring(2, 1) == "\"") {
@@ -2332,9 +2352,33 @@ function SimulatorWidget(node) {
                     if (ch === "$") {
                         number = parseInt(str.replace(/^\$/, ""), 16);
                         pushWord(number);
-                    } else if (ch >= "0" && ch <= "9" || ch == '-') {
+                    } else if (ch >= "0" && ch <= "9" || ch == "-") {
                         number = parseInt(str, 10);
                         pushWord(number);
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function DCQ(param) {
+            var values, number, str, ch;
+            values = param.split(",");
+            if (values.length === 0) {
+                return false;
+            }
+            for (var v = 0; v < values.length; v++) {
+                str = values[v];
+                if (str) {
+                    ch = str.substring(0, 1);
+                    if (ch === "$") {
+                        number = parseInt(str.replace(/^\$/, ""), 16);
+                        pushQuad(number);
+                    } else if (ch >= "0" && ch <= "9" || ch == "-") {
+                        number = parseInt(str, 10);
+                        pushQuad(number);
                     } else {
                         return false;
                     }
@@ -2749,6 +2793,14 @@ function SimulatorWidget(node) {
         function pushWord(value) {
             pushByte(value & 0xff);
             pushByte((value >> 8) & 0xff);
+        }
+
+        // Push a word to memory in little-endian order
+        function pushQuad(value) {
+            pushByte(value & 0xff);
+            pushByte((value >> 8) & 0xff);
+            pushByte((value >> 16) & 0xff);
+            pushByte((value >> 24) & 0xff);
         }
 
         function openPopup(content, title) {
