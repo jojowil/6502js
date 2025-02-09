@@ -2305,10 +2305,10 @@ function SimulatorWidget(node) {
                     if (ch === "$") {
                         number = parseInt(str.replace(/^\$/, ""), 16);
                         pushByte(number);
-                    } else if (ch >= "0" && ch <= "9") {
+                    } else if (ch >= "0" && ch <= "9" || ch == '-') {
                         number = parseInt(str, 10);
                         pushByte(number);
-                    } else if (ch = "\"" && str.substr(2, 1) == "\"") {
+                    } else if (ch = "\"" && str.substring(2, 1) == "\"") {
                         number = str.charCodeAt(1) & 0xff;
                         pushByte(number);
                     } else {
@@ -2332,7 +2332,7 @@ function SimulatorWidget(node) {
                     if (ch === "$") {
                         number = parseInt(str.replace(/^\$/, ""), 16);
                         pushWord(number);
-                    } else if (ch >= "0" && ch <= "9") {
+                    } else if (ch >= "0" && ch <= "9" || ch == '-') {
                         number = parseInt(str, 10);
                         pushWord(number);
                     } else {
