@@ -61,7 +61,7 @@
                     {
                         className: 'meta',
                         begin: '\\b('
-                            + 'define|dcb|dcw|txt|dsb'
+                            + 'define|dcb|dcw|dcq|txt|dsb|dsw|dsq'
                             + ')'
                             + '(?=\\s)' // followed by space
                     },
