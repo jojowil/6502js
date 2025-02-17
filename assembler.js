@@ -317,7 +317,7 @@ function SimulatorWidget(node) {
             if ((addr >= 0x0000) && (addr < 0xfe00)) {
                 return memArray[addr] = val;
             } else {
-                return False;
+                return false;
             }
         }
 
@@ -2137,7 +2137,14 @@ function SimulatorWidget(node) {
             // Build the substitution table
             for (var i = 0; i < lines.length; i++) {
                 lines[i] = sanitize(lines[i]);
+                // check for define
                 var match_data = lines[i].match(/^define\s+(\w+)\s+(\S+)/);
+                if (match_data) {
+                    add(match_data[1], sanitize(match_data[2]));
+                    lines[i] = ""; // We're done with this preprocessor directive, so delete it
+                }
+                // now check for include
+                match_data = lines[i].match(/^include\s+(\w+\.\w+)/);
                 if (match_data) {
                     add(match_data[1], sanitize(match_data[2]));
                     lines[i] = ""; // We're done with this preprocessor directive, so delete it
