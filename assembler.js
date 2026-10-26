@@ -78,9 +78,9 @@ function SimulatorWidget(node) {
 
     function stripText() {
         //Remove leading and trailing space in textarea
-        var text = $node.find('.code').val();
+        var text = $node.find('.codei-input').val();
         text = text.replace(/^\n+/, '').replace(/\s+$/, '');
-        $node.find('.code').val(text);
+        $node.find('.code-input').val(text);
     }
 
     function UI() {
@@ -3064,13 +3064,12 @@ function SimulatorWidget(node) {
     //while (ta == null) {
     //    ta = document.querySelector('textarea');
     //}
-    initialize();
-    const textarea = document.querySelector('textarea');
-    console.log(textarea);
-    textarea.id = "code"; // This is causing periodic failures due to null pointer.
-    textarea.classList.add('code');
+    //const textarea = document.querySelector('code-input');
+    //console.log(textarea);
+    //textarea.id = "code"; // This is causing periodic failures due to null pointer.
+    //textarea.classList.add('code');
 
-    //initialize();
+    initialize();
 }
 
 $(document).ready(function () {
