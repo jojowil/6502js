@@ -3061,7 +3061,7 @@ function SimulatorWidget(node) {
 
     // add class="code" and id="code" to code-input textarea
     const textarea = document.querySelector('textarea');
-    textarea.id = "code";
+    //textarea.id = "code"; // This is causing periodic failures due to null pointer.
     textarea.classList.add('code');
 
     initialize();
