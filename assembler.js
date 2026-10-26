@@ -3061,7 +3061,7 @@ function SimulatorWidget(node) {
 
     // add class="code" and id="code" to code-input textarea
     let ta = document.querySelector('textarea');
-    while (ta.id == null) {
+    while (ta == null) {
         ta = document.querySelector('textarea');
     }
     const textarea = ta;
