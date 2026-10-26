@@ -78,9 +78,9 @@ function SimulatorWidget(node) {
 
     function stripText() {
         //Remove leading and trailing space in textarea
-        var text = $node.find('.code-input').val();
+        var text = $node.find('.code').val();
         text = text.replace(/^\n+/, '').replace(/\s+$/, '');
-        $node.find('.code-input').val(text);
+        $node.find('.code').val(text);
     }
 
     function UI() {
