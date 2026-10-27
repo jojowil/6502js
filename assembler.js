@@ -3059,17 +3059,6 @@ function SimulatorWidget(node) {
         $node.find('.messages code').append(text).scrollTop(10000);
     }
 
-    // add class="code" and id="code" to code-input textarea
-    //let ta = document.querySelector('textarea');
-    //while (ta == null) {
-    //    ta = document.querySelector('textarea');
-    //}
-    //const textarea = document.querySelector('code-input');
-    const textarea = $node.find('.code');
-    console.log(textarea);
-    textarea.id = "code"; // This is causing periodic failures due to null pointer.
-    //textarea.classList.add('code');
-
     initialize();
 }
 
