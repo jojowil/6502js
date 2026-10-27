@@ -3065,10 +3065,10 @@ function SimulatorWidget(node) {
     //    ta = document.querySelector('textarea');
     //}
     //const textarea = document.querySelector('code-input');
-    const textarea = $node.find('.code');
-    console.log(textarea);
-    textarea.id = "code"; // This is causing periodic failures due to null pointer.
-    textarea.classList.add('code');
+    //const textarea = $node.find('.code');
+    //console.log(textarea);
+    //textarea.id = "code"; // This is causing periodic failures due to null pointer.
+    //textarea.classList.add('code');
 
     initialize();
 }
