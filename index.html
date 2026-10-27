@@ -120,11 +120,11 @@ button will be disabled when unassembled code exists in the text box
 (for example, if you add code, or if the code doesn't assemble correctly).
 Code stops executing when a BRK instruction is hit (which is the default
 instruction following your assembled code).
-* Reset - Rests registers, sets the PC to $0600, and clears the zero page,
+* Reset - Resets registers, sets the PC to $0600, and clears the zero page,
 stack, and displays.
 * Hexdump - Displays memory contents from $0600 to the end of the assembled
 code, in hexadecimal format.
-* Disasseble - Display a hexdump plus a disassembly of the memory contents
+* Disassemble - Displays a hexdump plus a disassembly of the memory contents
 from $0600 to the end of the assembled code. Note: if the disassembled 
 code does not match your source code after a Run, then your code has
 probably overwritten memory page $06 (and later) -- which is easy to do 
@@ -142,7 +142,7 @@ This is an alternative to cutting and pasting code into the emulator.
 
 * Monitor - Displays the memory region starting at "Start" and running 
 for "Length" bytes.
-* Text screen - Enables and disables the text display (on the right hand
+* Text screen - Enables and disables the text display (on the right-hand
 side).
 
 * Debugger - Turns on single-stepping controls.
@@ -156,8 +156,8 @@ system memory map:
 Page $00: 6502 zero page, used for variables and pointers
   Two locations in the zero page are connected to devices:
   * Memory location $fe contains a new random byte on every read.
-  * Memory location $ff contains the ascii code of the last key pressed.
-    Values written to $ff will remain unchanged until next key press.
+  * Memory location $ff contains the ASCII code of the last key pressed.
+    Values written to $ff will remain unchanged until the next key press.
     Printable keys have their ASCII value; BackSpace is $08; Enter is $0d;
     Cursor controls are $80=up, $81=right, $82=down, $83=left
 Page $01: 6502 stack (downward)
@@ -185,7 +185,7 @@ debugger.
 <b>Bitmap Display:</b>
 The bitmapped display is 32x32 pixels, and memory locations $200 to 
 $5ff map to the screen pixels. The lowest four bits of each byte set the
-colour of the corresponding pixel. The colours are:
+color of the corresponding pixel. The colors are:
 
 $0: Black
 $1: White
@@ -206,8 +206,8 @@ $f: Light grey
 
 <b>Character Display:</b>
 The character display is 80x25 characters in size, and memory locations
-$f000-$f7cf contains the ASCII characters on the display (row-major).
-Bit 7, if set, make a character appear in reverse video. Codes $21-$7e
+$f000-$f7cf contain the ASCII characters on the display (row-major).
+Bit 7, if set, makes a character appear in reverse video. Codes $21-$7e
 (and corresponding codes with bit 7 set, $a1-$fe) display; all other codes
 show up as blanks.
 
@@ -238,7 +238,7 @@ define		PLOT		$fff0 ; get/set cursor coordinates
 <b>Speed Slider:</b>
 The Speed slider controls the number of opcodes executed per display frame.
 When set fully left, the emulator operates at about 1% of the speed of an
-actual 6502 chip; when set rully right, the emulator operates close to
+actual 6502 chip; when set fully right, the emulator operates close to
 the actual speed of a 1MHz 6502 chip (depending on the code). It is 
 recommended that the higher speeds be used with the ROM routines.
 
@@ -249,7 +249,7 @@ A reference for the 6502 opcodes is available at
 Another reference with flag information:
 <a href="https://www.masswerk.at/6502/6502_instruction_set.html" target="_blank">https://www.masswerk.at/6502/6502_instruction_set.html</a>
 
-Example code which will run in this emulator:
+Example code that will run in this emulator:
 <a href="https://wiki.cdot.senecacollege.ca/wiki/6502_Emulator_Example_Code" target="_blank">https://wiki.cdot.senecacollege.ca/wiki/6502_Emulator_Example_Code</a>
 
 More examples, plus the ROM source code:
